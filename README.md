@@ -1,14 +1,14 @@
 HTML Pretty-Min
 ===============
 
-[![Build Status](https://travis-ci.org/wasinger/html-pretty-min.svg?branch=master)](http://travis-ci.org/wasinger/html-pretty-min)
+![tests](https://github.com/wasinger/html-pretty-min/actions/workflows/tests.yml/badge.svg?branch=master)
 [![Latest Version](http://img.shields.io/packagist/v/wa72/html-pretty-min.svg)](https://packagist.org/packages/wa72/html-pretty-min)
 
 
 HTML Pretty-Min is a PHP library for minifying and prettyprinting (indenting) HTML documents
 that works directly on the DOM tree of an HTML document.
 
-Currently it has the following features:
+Currently, it has the following features:
 
 - **Prettyprint**:
   - Indent Block-level elements, do not indent inline elements
@@ -44,6 +44,26 @@ $output = $pm
 ```
 
 For prettyprinting, call the `indent()` method instead of `minify()`.
+
+
+The `PrettyMin()` constructor can be given an associative options array. Here are the possible option keys and their default values:
+```
+    'minify_js' => true,
+    'minify_css' => true,
+    'remove_comments' => true,
+    'remove_comments_exeptions' => ['/^\[if /'],
+    'keep_whitespace_around' => [
+        // keep whitespace around all inline elements
+        'b', 'big', 'i', 'small', 'tt',
+        'abbr', 'acronym', 'cite', 'code', 'dfn', 'em', 'kbd', 'strong', 'samp', 'var',
+        'a', 'bdo', 'br', 'img', 'map', 'object', 'q', 'span', 'sub', 'sup',
+        'button', 'input', 'label', 'select', 'textarea'
+    ],
+    'keep_whitespace_in' => ['script', 'style', 'pre'],
+    'remove_empty_attributes' => ['style', 'class'],
+    'indent_characters' => "\t"
+```
+
 
 **Attention**: Because the formatting is done directly on the DOM tree, a DOMDocument object given to the `load()` method
 will be modified:
